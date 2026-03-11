@@ -1,4 +1,9 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+// Use Google Public DNS to resolve MongoDB Atlas SRV records
+// (local/ISP DNS may not support SRV lookups)
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 if (!process.env.MONGODB_URI) {
   throw new Error("Please add your MONGODB_URI to .env");

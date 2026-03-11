@@ -42,7 +42,16 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Registration error:", error);
-    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+    console.error("Registration error:", error instanceof Error ? error.message : String(error));
+    if (error instanceof Error) {
+      console.error("Stack trace:", error.stack);
+    }
+    return NextResponse.json(
+      { 
+        error: "Something went wrong during registration",
+        details: error instanceof Error ? error.message : "Unknown error"
+      }, 
+      { status: 500 }
+    );
   }
 }
