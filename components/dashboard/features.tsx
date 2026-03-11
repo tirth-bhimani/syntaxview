@@ -7,28 +7,63 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import  Link  from "next/link";
+import Link from "next/link";
 
 const featuresData = [
   {
     title: "Array",
-    description: "A fixed-size list where all items are of the same type, accessed by a numerical index.",
+    description:
+      "A fixed-size list where all items are of the same type, accessed by a numerical index.",
     imgSrc: "/array.png",
+    href: "/array",
   },
   {
     title: "Stack",
-    description: "Follows a Last-In, First-Out (LIFO) principle, where elements are added and removed from the same end.",
+    description:
+      "Follows a Last-In, First-Out (LIFO) principle, where elements are added and removed from the same end.",
     imgSrc: "/stack.png",
+    href: "/stack",
   },
   {
     title: "Queue",
-    description: "A First-In, First-Out (FIFO) data structure where elements are added and removed from the other.",
+    description:
+      "A First-In, First-Out (FIFO) data structure where elements are added and removed from the other.",
     imgSrc: "/queue.png",
+    href: "/queue",
   },
   {
     title: "Linked List",
-    description: "A data structure of nodes, where each node contains data and a pointer that links to the next node.",
+    description:
+      "A data structure of nodes, where each node contains data and a pointer that links to the next node.",
     imgSrc: "/linked-list.png",
+    href: "/linked-list",
+  },
+  {
+    title: "Binary Tree",
+    description:
+      "A hierarchical structure where each node has at most two children, enabling efficient search and traversal.",
+    imgSrc: null,
+    href: "/binary-tree",
+    gradient: "from-emerald-500 to-cyan-500",
+    emoji: "🌳",
+  },
+  {
+    title: "Graph",
+    description:
+      "A non-linear structure of vertices connected by edges, supporting BFS and DFS traversals.",
+    imgSrc: null,
+    href: "/graph",
+    gradient: "from-purple-500 to-pink-500",
+    emoji: "🔗",
+  },
+  {
+    title: "Hash Table",
+    description:
+      "Maps keys to values using a hash function for fast O(1) average-time lookups and inserts.",
+    imgSrc: null,
+    href: "/hash-table",
+    gradient: "from-amber-500 to-orange-500",
+    emoji: "#️⃣",
   },
 ];
 
@@ -47,13 +82,23 @@ const Features = () => {
             >
               <CardHeader className="p-0">
                 <div className="relative h-48 w-full">
-                  <Image
-                    src={feature.imgSrc}
-                    alt={feature.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  {feature.imgSrc ? (
+                    <>
+                      <Image
+                        src={feature.imgSrc}
+                        alt={feature.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    </>
+                  ) : (
+                    <div
+                      className={`h-full w-full bg-gradient-to-br ${feature.gradient || "from-cyan-500 to-purple-500"} flex items-center justify-center`}
+                    >
+                      <span className="text-6xl">{feature.emoji}</span>
+                    </div>
+                  )}
                 </div>
               </CardHeader>
               <CardContent className="p-6 text-center">
@@ -64,7 +109,7 @@ const Features = () => {
                   {feature.description}
                 </CardDescription>
                 <button className="mt-4 px-4 py-2 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-sm font-semibold opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-cyan-500/20">
-                  <Link href={`/${feature.title.toLowerCase()}`}>Learn More</Link>
+                  <Link href={feature.href}>Learn More</Link>
                 </button>
               </CardContent>
             </Card>
